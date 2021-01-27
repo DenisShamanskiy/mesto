@@ -1,0 +1,11 @@
+.elements__like-active {
+  width: 22px;
+  height: 19px;
+  background-image: url(../../../images/elements__like-active.png);
+  margin: auto 0;
+  cursor: pointer;
+}
+
+.elements__like-active:hover {
+  opacity: 0.5;
+}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesto</title>
+    <link rel="stylesheet" href="pages/index.css">
+
+</head>
+
+<body class="body">
+
+    <div class="page">
+
+        <header class="header">
+            <div class="header__logo"></div>
+            <div class="header__line"></div>
+        </header>
+
+        <main>
+
+            <section class="profile">
+                <div class="profile__avatar"></div>
+                <div class="profile__profile-info">
+                    <div class="profile__description">
+                        <h1 class="profile__name">Жак-Ив Кусто</h1>
+                        <div class="profile__button-edit"></div>
+                    </div>
+                    <p class="profile__job">Исследователь океана</p>
+                </div>
+                <div class="profile__button-add">
+                    <img src="images/profile__button-add.png" alt="Кнопка добавить">
+                </div>
+
+            </section>
+
+            <section class="elements">
+
+                <div class="elements__element">
+                    <img class="elements__image" src="images/New_York.jpg" alt="Нью-Йорк">
+                    <div class="elements__place">
+                        <p class="elements__name">Нью-Йорк</p>
+                        <div class="elements__like"></div>
+                    </div>
+                </div>
+
+                <div class="elements__element">
+                    <img class="elements__image" src="images/Paris.jpg" alt="Париж">
+                    <div class="elements__place">
+                        <p class="elements__name">Париж</p>
+                        <div class="elements__like"></div>
+                    </div>
+                </div>
+
+                <div class="elements__element">
+                    <img class="elements__image" src="images/London.jpg" alt="Лондон">
+                    <div class="elements__place">
+                        <p class="elements__name">Лондон</p>
+                        <div class="elements__like"></div>
+                    </div>
+                </div>
+
+                <div class="elements__element">
+                    <img class="elements__image" src="images/Dubai.jpg" alt="Дубай">
+                    <div class="elements__place">
+                        <p class="elements__name">Дубай</p>
+                        <div class="elements__like"></div>
+                    </div>
+                </div>
+
+                <div class="elements__element">
+                    <img class="elements__image" src="images/Tokio.jpg" alt="Токио">
+                    <div class="elements__place">
+                        <p class="elements__name">Токио</p>
+                        <div class="elements__like"></div>
+                    </div>
+                </div>
+
+                <div class="elements__element">
+                    <img class="elements__image" src="images/Saint_Petersburg.jpg" alt="Санкт-Петербург">
+                    <div class="elements__place">
+                        <p class="elements__name">Санкт-Петербург</p>
+                        <div class="elements__like"></div>
+                    </div>
+                </div>
+
+            </section>
+
+        </main>
+
+        <footer class="footer">© 2020 Mesto Russia</footer>
+
+    </div>
+
+    <div class="popup">
+        <form class="popup__form">
+            <button type="button" class="popup__button-close"></button>
+            <fieldset class="popup__information">
+
+                <legend class="popup__heading">Редактировать профиль</legend>
+
+                <input type="text" placeholder="Жак-Ив Кусто" class="popup__field popup__name">
+                <input type="text" placeholder="Исследователь океана" class="popup__field popup__job">
+
+                <button type="submit" class="popup__button-save">Сохранить</button>
+
+            </fieldset>
+        </form>
+    </div>
+
+    <script src="scripts/index.js"></script>
+
+</body>
+
+</html>
