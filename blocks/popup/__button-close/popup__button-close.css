@@ -6,9 +6,8 @@
   right: -40px;
   background: rgba(0, 0, 0, 0);
   border: none;
-  background-image: url(../../../images/popup__button-close.png);
-  background-position: center;
   cursor: pointer;
+  padding: 0;
 }
 
 .popup__button-close:hover {

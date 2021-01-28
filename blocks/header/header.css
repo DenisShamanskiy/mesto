@@ -1,6 +1,5 @@
 .header {
-  width: 68.75%;
-  height: 74px;
+  width: 880px;
   margin: 45px auto 0;
   display: flex;
   flex-direction: column;
@@ -11,7 +10,7 @@
 
 @media screen and (max-width: 986px) {
   .header {
-    min-width: 581px;
+    width: 581px;
   }
 }
 
@@ -19,7 +18,6 @@
   .header {
     width: 100%;
     min-width: 320px;
-    height: 56px;
     margin: 28px auto 0;
   }
 }
