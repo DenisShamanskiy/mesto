@@ -16,7 +16,10 @@
 
 @media screen and (max-width: 621px) {
   .elements {
+    width: 282px;
+    /*
     width: 88.125%;
+    */
     display: flex;
     flex-direction: column;
     align-items: center;

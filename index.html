@@ -28,74 +28,27 @@
                     </div>
                     <p class="profile__job">Исследователь океана</p>
                 </div>
-                <button type="button" class="profile__button-add">
+                <button type="button" class="profile__button-add-image">
                     <img src="images/profile__button-add.svg" alt="Кнопка добавить">
                 </button>
             </section>
 
             <section class="elements">
-
-                <div class="elements__element">
-                    <img class="elements__image" src="images/New_York.jpg" alt="Нью-Йорк">
-                    <div class="elements__place">
-                        <h2 class="elements__name">Нью-Йорк</h2>
-                        <button type="button" class="elements__like"></button>
-                    </div>
-                </div>
-
-                <div class="elements__element">
-                    <img class="elements__image" src="images/Paris.jpg" alt="Париж">
-                    <div class="elements__place">
-                        <h2 class="elements__name">Париж</h2>
-                        <button type="button" class="elements__like"></button>
-                    </div>
-                </div>
-
-                <div class="elements__element">
-                    <img class="elements__image" src="images/London.jpg" alt="Лондон">
-                    <div class="elements__place">
-                        <h2 class="elements__name">Лондон</h2>
-                        <button type="button" class="elements__like"></button>
-                    </div>
-                </div>
-
-                <div class="elements__element">
-                    <img class="elements__image" src="images/Dubai.jpg" alt="Дубай">
-                    <div class="elements__place">
-                        <h2 class="elements__name">Дубай</h2>
-                        <button type="button" class="elements__like"></button>
-                    </div>
-                </div>
-
-                <div class="elements__element">
-                    <img class="elements__image" src="images/Tokio.jpg" alt="Токио">
-                    <div class="elements__place">
-                        <h2 class="elements__name">Токио</h2>
-                        <button type="button" class="elements__like"></button>
-                    </div>
-                </div>
-
-                <div class="elements__element">
-                    <img class="elements__image" src="images/Saint_Petersburg.jpg" alt="Санкт-Петербург">
-                    <div class="elements__place">
-                        <h2 class="elements__name">Санкт-Петербург</h2>
-                        <button type="button" class="elements__like"></button>
-                    </div>
-                </div>
             </section>
+            
         </main>
         <footer class="footer">
-            <p class="footer__copyright">© 2020 Mesto Russia</p>
+            <p class="footer__copyright">© 2021 Mesto Russia</p>
         </footer>
 
     </div>
 
-    <div class="popup">
-        <form class="popup__form" name="info-user">
+    <div class="popup popup__user">
+        <form class="popup__form" name="user">
             <button type="button" class="popup__button-close">
                 <img class="popup__button-close-image" src="images/popup__button-close.svg" alt="Закрыть окно редактирования">
             </button>
-            <fieldset class="popup__information">
+            <fieldset class="popup__title">
 
                 <legend class="popup__heading">Редактировать профиль</legend>
 
@@ -106,7 +59,51 @@
 
             </fieldset>
         </form>
+
     </div>
+
+    <div class="popup popup__place">
+        <form class="popup__form" name="place">
+            <button type="button" class="popup__button-close popup__button-close_place">
+                <img class="popup__button-close-image" src="images/popup__button-close.svg" alt="Закрыть окно">
+            </button>
+            <fieldset class="popup__title">
+
+                <legend class="popup__heading">Новое место</legend>
+
+                <input type="text" name="popup-place" placeholder="Название" class="popup__field popup__field_type_place">
+                <input type="text" name="popup-image" placeholder="Ссылка на картинку" class="popup__field popup__field_type_image">
+
+                <button type="submit" class="popup__button-save">Сохранить</button>
+
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="popup popup__image">
+
+        <div class="popup__image-view">
+            <img class="popup__img" src="" alt="">
+            <div class="popup__caption"></div>
+            
+            <button type="button" class="popup__button-close popup__button-close_image">
+                <img class="popup__button-close-image" src="images/popup__button-close.svg" alt="Закрыть окно">
+            </button>
+            
+        </div>
+
+    </div>
+
+    <template class="template">
+        <div class="elements__element">
+            <img class="elements__image" src="item.link" alt=item.name>
+            <button type="button" class="elements__btn-remove"></button>
+            <div class="elements__place">
+            <h2 class="elements__name"></h2>
+            <button type="button" class="elements__like"></button>
+            </div>
+        </div>
+    </template>
 
     <script src="scripts/index.js"></script>
 
