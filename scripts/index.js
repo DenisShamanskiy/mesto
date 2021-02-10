@@ -21,66 +21,35 @@ const initialPlaces = [
     },
     {
       name: 'Санкт-Петербург',
-      link: 'https://images.unsplash.com/photo-1590932074845-302cf56323a7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1271&q=80'
+      link: 'https://images.unsplash.com/photo-1571850567059-c1c75ad541e6?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1275&q=80'
     }
   ];
 
 const elementsContainer = document.querySelector('.elements');
 const templateEl = document.querySelector('.template');
 
-/*const popup = document.querySelector('.popup');*/
 const popupUser = document.querySelector('.popup__user');               /* Окно редактирования пользователя */
 const popupPlace = document.querySelector('.popup__place');             /* Окно добавления фото */
 const popupImage = document.querySelector('.popup__image');             /* Окно просмотра фото */
-
-/*Удалить let elements__image = document.querySelector('.elements__image')*/
-
-
-/* Кнопки */
-
-/*Удалить   let popupOpenButton = document.querySelector('.profile__button-edit');
-            const popupImageOpenButton = document.querySelector('.profile__button-add-image');
-            let popupCloseButton = document.querySelector('.popup__button-close');*/
 
 const profileEditBtn = document.querySelector('.profile__button-edit');                 /* Кнопка редактирования пользователя */
 const imageAddBtn = document.querySelector('.profile__button-add-image');               /* Кнопка добавления фото */
 const popupCloseBtn = document.querySelector('.popup__button-close');                   /* Кнопка закрытия окна редактирования пользователя*/
 const popupCloseBtnPlace = document.querySelector('.popup__button-close_place');        /* Кнопка закрытия окна для добавления фото */
 const popupCloseBtnImage = document.querySelector('.popup__button-close_image');        /* Кнопка закрытия окна для просмотра фото */
-/* Удалить const popupSave = document.querySelector('.popup__button-save'); */
 
-const profileName = document.querySelector('.profile__name');                             /* Имя пользователя на сайте */
-const profileJob = document.querySelector('.profile__job');                               /* Профессия пользователя на сайте */
-const inputName = document.querySelector('.popup__field_type_name');                      /* Имя пользователя (input) */
-const inputJob = document.querySelector('.popup__field_type_job');                        /* Профессия пользователя (input) */
-const inputPlaceEl = document.querySelector('.popup__field_type_place');
-const inputImageEl = document.querySelector('.popup__field_type_image');
+let profileName = document.querySelector('.profile__name');                             /* Имя пользователя на сайте */
+let profileJob = document.querySelector('.profile__job');                               /* Профессия пользователя на сайте */
+let inputName = document.querySelector('.popup__field_type_name');                      /* Имя пользователя (input) */
+let inputJob = document.querySelector('.popup__field_type_job');                        /* Профессия пользователя (input) */
+let inputPlaceEl = document.querySelector('.popup__field_type_place');
+let inputImageEl = document.querySelector('.popup__field_type_image');
 
 const formSubmit = document.querySelector('.popup__form');                                /* Отправка формы */
 
 const togglePopup = function() {popupUser.classList.toggle('popup_opened');}
 const togglePopupPlace = function() {popupPlace.classList.toggle('popup_opened');}
 const togglePopupImage = function() {popupImage.classList.toggle('popup_opened');}
-
-
-/* Удалить let formInputImage = document.querySelector('.popup__place');*/
-/* Удалить let popupSaveImage = document.querySelector('.popup__button-save-place');*/
-
-
-/* Удалить const inputPlaceEl= document.querySelector('.popup__field_type_place'); */
-/* Удалить const inputImageEl = document.querySelector('.popup__field_type_image'); */
-
-
-/* Удалить let togglePopupImage = function() {popupPlace.classList.toggle('popup_opened');}*/
-/* Удалить let togglePopupImageSee = function() {popupImage.classList.toggle('popup_opened');}*/
-
-/* Удалить let openPopupImage = function () {
-    togglePopupPlace()
-}*/
-
-/* Удалить let openPopupImageSee = function () {
-    togglePopupImage()
-}*/
 
 
 
@@ -100,10 +69,10 @@ function getPlace(item) {
     const elementName = newItem.querySelector('.elements__name').textContent = item.name;
 
     const removeBtn = newItem.querySelector('.elements__btn-remove');
-    removeBtn.addEventListener('click', imageDelete);
+    removeBtn.addEventListener('click', deleteImage);
 
     let img = newItem.querySelector('.elements__image')
-    img.addEventListener('click', imageView);
+    img.addEventListener('click', viewImage);
 
     return newItem;
 }
@@ -117,14 +86,14 @@ function render() {
 
 render();
 
-function formSubmitUser (evt) {
+function submitFormUser (evt) {
     evt.preventDefault();
     profileName.textContent = inputName.value
     profileJob.textContent = inputJob.value
     togglePopup()
 }                                                                   /* Отправка формы редактирования пользователя */
 
-function formSubmitPlace (evt) {
+function submitFormPlace (evt) {
     evt.preventDefault();
     const inputPlace = inputPlaceEl.value;
     const inputImage = inputImageEl.value;
@@ -135,24 +104,19 @@ function formSubmitPlace (evt) {
     togglePopupPlace()
 }                                                                   /* Отправка формы добавления фото */
 
-
-
-
-
-function imageDelete(event) {
+function deleteImage(event) {
     const targetEl = event.target;
     const targetItem = targetEl.closest('.elements__element');
     targetItem.remove();
 }                                                                   /* Функция удаления фото */
 
-function imageView(event) {
+function viewImage(event) {
     const targetEl = event.target
     const linkimage = (targetEl.src)
     const linkiname = (targetEl.alt)
-    let popupImageView = document.querySelector('.popup__img').src = linkimage;
+    let popupImageView = document.querySelector('.popup__photo').src = linkimage;
     let popupNameView = document.querySelector('.popup__caption').textContent = linkiname;
 }                                                                                                   /* Функция просмотра фото */ 
-
 
 
 
@@ -163,8 +127,8 @@ popupCloseBtn.addEventListener('click', togglePopup)
 popupCloseBtnPlace.addEventListener('click', openPopupPlace)
 popupCloseBtnImage.addEventListener('click', openPopupImage)
 
-formSubmit.addEventListener('submit', formSubmitUser)
-popupPlace.addEventListener('submit', formSubmitPlace)
+formSubmit.addEventListener('submit', submitFormUser)
+popupPlace.addEventListener('submit', submitFormPlace)
 
 
 document.onclick = function(evt) {
@@ -179,41 +143,3 @@ document.onclick = function(evt) {
         openPopupImage()
     }
 }
-
-/* Удалить function getItemHTML(item) {
-    return `<div class="elements__element">
-                <img class="elements__image" src=${item.link} alt="Нью-Йорк">
-                <div class="elements__place">
-                <h2 class="elements__name">${item.name}</h2>
-                <button type="button" class="elements__like"></button>
-                </div>
-            </div>`
-}*/
-
-/*function choice (evt) {    
-    if (evt.target === ViewOpen.querySelector('.elements__image')) 
-    {
-    popupImageSee.classList.toggle('popup_opened')
-     let a = elementImage.src;
-     let b = elementImage.alt;
-    viewImage.src = a;
-    viewImage.alt = b;
-    viewTitle.textContent = b;
-    a = '';
-    b = '';
-  }
-  }*/
-
-    /*
-	var target = event.target;
-    alert(target.tagName); 
-    const popupSrcImage = document.querySelector(".popup__src-image");
-    popupSrcImage.setAttribute("src", link);
-    //выведет 'p' - абзац
-    }*/
-
-/* Удалить function formSubmitHandlerImage (evt) {
-    evt.preventDefault();
-    const inputPlace = 
-    togglePopup()
-}*/

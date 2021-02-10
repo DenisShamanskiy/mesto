@@ -3,7 +3,7 @@
   margin: 51px auto 0;
   display: grid;
   grid-template-columns: repeat(3, 282px);
-  grid-template-rows: repeat(1fr);
+  grid-template-rows: 361px;
   gap: 20px 17px;
 }
 
@@ -17,11 +17,6 @@
 @media screen and (max-width: 621px) {
   .elements {
     width: 282px;
-    /*
-    width: 88.125%;
-    */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    grid-template-columns: 282px;
   }
 }
