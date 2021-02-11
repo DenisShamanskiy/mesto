@@ -28,9 +28,9 @@ const initialPlaces = [
 const elementsContainer = document.querySelector('.elements');
 const templateEl = document.querySelector('.template');
 
-const popupUser = document.querySelector('.popup__user');               /* Окно редактирования пользователя */
-const popupPlace = document.querySelector('.popup__place');             /* Окно добавления фото */
-const popupImage = document.querySelector('.popup__image');             /* Окно просмотра фото */
+const popupUser = document.querySelector('.popup_type_user');               /* Окно редактирования пользователя */
+const popupPlace = document.querySelector('.popup_type_place');             /* Окно добавления фото */
+const popupImage = document.querySelector('.popup_type_image');             /* Окно просмотра фото */
 
 const profileEditBtn = document.querySelector('.profile__button-edit');                 /* Кнопка редактирования пользователя */
 const imageAddBtn = document.querySelector('.profile__button-add-image');               /* Кнопка добавления фото */
