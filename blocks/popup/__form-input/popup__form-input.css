@@ -1,4 +1,4 @@
-.popup__field {
+.popup__form-input {
   width: 358px;
   min-height: 40px;
   font-family: "Inter", ‘Arial’, sans-serif;
@@ -14,7 +14,7 @@
 }
 
 @media screen and (max-width: 621px) {
-  .popup__field {
+  .popup__form-input {
     width: 238px;
   }
 }

@@ -28,6 +28,8 @@ const initialPlaces = [
 const elementsContainer = document.querySelector('.elements');
 const templateEl = document.querySelector('.template');
 
+const body = document.querySelector('.body');
+
 const popupUser = document.querySelector('.popup_type_user');                           /* Окно редактирования пользователя */
 const popupPlace = document.querySelector('.popup_type_place');                         /* Окно добавления фото */
 const popupImage = document.querySelector('.popup_type_image');                         /* Окно просмотра фото */
@@ -40,18 +42,14 @@ const popupCloseBtnImage = document.querySelector('.popup__button-close_image');
 
 const profileName = document.querySelector('.profile__name');                            /* Имя пользователя на сайте */
 const profileJob = document.querySelector('.profile__job');                              /* Профессия пользователя на сайте */
-const inputName = document.querySelector('.popup__field_type_name');                     /* Имя пользователя (input) */
-const inputJob = document.querySelector('.popup__field_type_job');                       /* Профессия пользователя (input) */
-const inputPlaceEl = document.querySelector('.popup__field_type_place');
-const inputImageEl = document.querySelector('.popup__field_type_image');
+const inputName = document.querySelector('.popup__form-input_type_name');                /* Имя пользователя (input) */
+const inputJob = document.querySelector('.popup__form-input_type_job');                  /* Профессия пользователя (input) */
+const inputPlaceEl = document.querySelector('.popup__form-input_type_place');
+const inputImageEl = document.querySelector('.popup__form-input_type_image');
 
 const formSubmit = document.querySelector('.popup__form');                                /* Отправка формы */
 
-const openPopupUser =  () => {
-  openPopup(popupUser)
-  inputName.value = profileName.textContent
-  inputJob.value = profileJob.textContent
-}                                                                                         /* Открыть окно редактирования пользователя */
+const openPopupUser =  () => {openPopup(popupUser)}                                       /* Открыть окно редактирования пользователя */
 const openPopupPlace = () => {openPopup(popupPlace)}                                      /* Открыть окно добавления фото */
 const openPopupImage = () => {openPopup(popupImage)}                                      /* Открыть окно просмотра фото */
 
@@ -62,17 +60,46 @@ const closePopupImage = () => {closePopup(popupImage)}                          
 const popupImageView = document.querySelector('.popup__photo');
 const popupNameView = document.querySelector('.popup__caption');
 
+const addImageKeyEnter = (evt) => {
+  if ((document.querySelector('.popup_type_place').classList.contains('.popup_opened') && (evt.key === 'Enter'))) {
+  }
+  body.addEventListener('keydown', addImageKeyEnter)
+  submitFormPlace();
+}                                                                                 /* Отправить форму добавления фото клавишей 'Enter'*/
 
+
+
+function getInputValueProfile() {
+  inputName.value = profileName.textContent
+  inputJob.value = profileJob.textContent
+}                                                                 /* Получить данные в поле (input) окна редактирования пользователя */
+
+getInputValueProfile()
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  body.addEventListener('keydown', closePopupEsc)
+  body.addEventListener('mousedown', closePopupMouse)
 }                                                                                         /* Открыть Popup */
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  body.removeEventListener('mousedown', closePopupMouse)
 }                                                                                         /* Закрыть Popup */
 
+function closePopupEsc(evt) {
+  const openedPopup = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape') {
+    openedPopup.classList.remove('popup_opened');
+}
+  body.removeEventListener('keydown', closePopupEsc)
+}                                                                                         /* Закрыть Popup клавишей Escape */
 
+function closePopupMouse(evt) {
+  const openedPopup = document.querySelector('.popup_opened');
+  if (evt.target === openedPopup) {
+    openedPopup.classList.remove('popup_opened');}
+}                                                                                         /* Закрыть Popup кликом в любом месте */
                                                                                
 function viewImage(link, name) {
   popupImageView.src = link;
@@ -81,13 +108,9 @@ function viewImage(link, name) {
   openPopupImage();
 }                                                                                         /* Увеличить фото */
 
-
-
 function toggleLikeButton(evt) {
   evt.target.classList.toggle('elements__like_active');
 }                                                                                         /* Лайк */
-
-
 
 function getPlace(item) {
     const newItem = templateEl.content.cloneNode(true);
@@ -125,14 +148,17 @@ function submitFormUser (evt) {
     closePopupUser()
 }                                                                                         /* Отправка формы редактирования пользователя */
 
-function submitFormPlace (evt) {
+function submitFormPlace (evt, formElement, formElement) {
     evt.preventDefault();
     const inputPlace = inputPlaceEl.value;
     const inputImage = inputImageEl.value;
+    const buttonSubmit = popupPlace.querySelector(".popup__button-save");
     const inputListItem = getPlace({name: inputPlace, link: inputImage});
     elementsContainer.prepend(inputListItem);
     inputPlaceEl.value = ''
     inputImageEl.value = ''
+    buttonSubmit.setAttribute("disabled", true)
+    body.removeEventListener('keydown', addImageKeyEnter)
     closePopupPlace()
 }                                                                                          /* Отправка формы добавления фото */
 
