@@ -1,12 +1,4 @@
 .popup {
-  /*display: none;      проверка
-  width: 100%;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  position: fixed;
-  background: rgba(0, 0, 0, 0.5);*/
-
   position: fixed;
   top: 0;
   left: 0;
@@ -17,7 +9,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /*display: none;*/
   opacity: 0;
   visibility: hidden;
   transition: 0.4s opacity, 0.4s visibility;

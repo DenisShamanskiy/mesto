@@ -1,79 +1,66 @@
-const showInputError = (inputElement, errorMessage,) => {
-    const formSectionElement = inputElement.closest(".popup__form-section");
-    const errorElement = formSectionElement.querySelector(".popup__form-input-error");
-  
-    errorElement.textContent = errorMessage;
-    errorElement.classList.add("popup__form-input-error_active");
-  };                                                                                          /* Показать ошибку */
-  
-const hideInputError = (inputElement) => {
-    const formSectionElement = inputElement.closest(".popup__form-section");
-    const errorElement = formSectionElement.querySelector(".popup__form-input-error");
-  
-    errorElement.textContent = "";
-    errorElement.classList.remove("popup__form-input-error_active");
-};                                                                                            /* Скрыть ошибку */
+/* Показать ошибку */
+const showInputError = function(settingValid, formElement, inputElement, errorMessage) {
+  const errorElement = formElement.querySelector(`${settingValid.inputErrorClass }_type_${inputElement.name}`);
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add(settingValid.activeInputErrorClass);
+};   
+                                                                                       
+/* Скрыть ошибку */
+const hideInputError = function(settingValid, formElement) {
+  const errorElement = formElement.querySelector(settingValid.inputErrorClass);
+  errorElement.textContent = "";
+  errorElement.classList.remove(settingValid.activeInputErrorClass);
+};                                                                              
 
+/* Проверить валидность поля. Показать/скрыть ошибку */
+const checkInputValidity = function(settingValid, formElement, inputElement) {
+  if (!inputElement.validity.valid) {
+    showInputError(settingValid, formElement, inputElement, inputElement.validationMessage)
+  } else {
+    hideInputError(settingValid, formElement, inputElement)
+  }
+};                                                                                    
 
-const checkInputValidity = (formElement, inputElement) => {
-    const isInputNotValid = !inputElement.validity.valid;
-  
-    if (isInputNotValid) {
-      const errorMessage = inputElement.validationMessage;
-  
-      showInputError(inputElement, errorMessage);
-    } else {
-      hideInputError(inputElement);
-    }
-  }                                                                                           /* Проверить вадность поля. Показать/скрыть ошибку */
-
-
+/* Включить/выключить кнопку отправки формы */
 const toggleButtonState = (inputList, buttonElement) => {
-    const findAtLeastOneNotValid = (inputElement) => !inputElement.validity.valid;
-    const hasNotValidInput = inputList.some(findAtLeastOneNotValid);
-  
-    if (hasNotValidInput) {
-      buttonElement.setAttribute("disabled", true);
+  const findAtLeastOneNotValid = (inputElement) => !inputElement.validity.valid;
+  const hasNotValidInput = inputList.some(findAtLeastOneNotValid);
+  if (hasNotValidInput) {
+    buttonElement.setAttribute("disabled", true);
+  } else {
+    buttonElement.removeAttribute("disabled");
+  }
+};                                                                                          
 
-    } else {
-      buttonElement.removeAttribute("disabled");
-    }
-  };                                                                                          /* Включить/выключить кнопку отправки формы */
+const setEventListeners = function(settingValid, formElement) {
 
+  const inputList = Array.from(formElement.querySelectorAll(settingValid.inputSelector));
+  const buttonElement = formElement.querySelector(settingValid.submitButtonSelector);
 
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
-  };                                                                                          /* Отмена отправки формы */
-
-const setEventListeners = (formElement, inputSelector,) => {
-    formElement.addEventListener("submit", handleFormSubmit);
-  
-    const inputList = Array.from(formElement.querySelectorAll(inputSelector));
-    const buttonElement = formElement.querySelector(".popup__button-save");
-  
-    const inputListIterator = (inputElement) => {
-      const handleInput = () => {
-        checkInputValidity(formElement, inputElement);
-        toggleButtonState(inputList, buttonElement);
-      };
-  
-      inputElement.addEventListener("input", handleInput);
+  const inputListIterator = (inputElement) => {
+    const handleInput = () => {
+      checkInputValidity(settingValid, formElement, inputElement);
+      toggleButtonState(inputList, buttonElement);
     };
-  
-    inputList.forEach(inputListIterator);
-  
-    toggleButtonState(inputList, buttonElement);
+    inputElement.addEventListener("input", handleInput);
   };
+  inputList.forEach(inputListIterator);
+  toggleButtonState(inputList, buttonElement);
+};
 
-const enableValidation = ({formSelector, inputSelector}) => {
-    const formElements = document.querySelectorAll(formSelector);
-    const formList = Array.from(formElements);
-    formList.forEach((formElement) => {
-      setEventListeners(formElement, inputSelector);
-    });
-  };                                                                                          /* Находим формы. Устанивливаем обработчики */
+/* Находим формы. Устанивливаем обработчики */
+function enableValidation(settingValid) {
+  const formElements = document.querySelectorAll(settingValid.formSelector);
+  const formList = Array.from(formElements);
+  formList.forEach((formElement) => {
+    setEventListeners(settingValid, formElement);
+  });
+};                                                                                          
 
 enableValidation({
-    formSelector: ".popup__form",
-    inputSelector: ".popup__form-input",
-  });
+  formSelector: ".popup__form",
+  inputSelector: ".popup__form-input",
+  submitButtonSelector: '.popup__button-save',
+  inputErrorClass: '.popup__form-input-error',
+  activeInputErrorClass: '.popup__form-input-error_active',
+});

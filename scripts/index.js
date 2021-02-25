@@ -30,15 +30,16 @@ const templateEl = document.querySelector('.template');
 
 const body = document.querySelector('.body');
 
-const popupUser = document.querySelector('.popup_type_user');                           /* Окно редактирования пользователя */
-const popupPlace = document.querySelector('.popup_type_place');                         /* Окно добавления фото */
-const popupImage = document.querySelector('.popup_type_image');                         /* Окно просмотра фото */
+const popupUser = document.querySelector('.popup_type_user');                            /* Окно редактирования пользователя */
+const popupPlace = document.querySelector('.popup_type_place');                          /* Окно добавления фото */
+const popupImage = document.querySelector('.popup_type_image');                          /* Окно просмотра фото */
 
-const profileEditBtn = document.querySelector('.profile__button-edit');                 /* Кнопка редактирования пользователя */
-const imageAddBtn = document.querySelector('.profile__button-add-image');               /* Кнопка добавления фото */
-const popupCloseBtn = document.querySelector('.popup__button-close');                   /* Кнопка закрытия окна редактирования пользователя*/
-const popupCloseBtnPlace = document.querySelector('.popup__button-close_place');        /* Кнопка закрытия окна для добавления фото */
-const popupCloseBtnImage = document.querySelector('.popup__button-close_image');        /* Кнопка закрытия окна для просмотра фото */
+const profileEditBtn = document.querySelector('.profile__button-edit');                  /* Кнопка редактирования пользователя */
+const imageAddBtn = document.querySelector('.profile__button-add-image');                /* Кнопка добавления фото */
+const popupCloseBtn = document.querySelector('.popup__button-close');                    /* Кнопка закрытия окна редактирования пользователя*/
+const popupCloseBtnPlace = document.querySelector('.popup__button-close_place');         /* Кнопка закрытия окна для добавления фото */
+const popupCloseBtnImage = document.querySelector('.popup__button-close_image');         /* Кнопка закрытия окна для просмотра фото */
+const buttonSubmit = popupPlace.querySelector(".popup__button-save");                    /* Кнопка сохранения и отправки данных */
 
 const profileName = document.querySelector('.profile__name');                            /* Имя пользователя на сайте */
 const profileJob = document.querySelector('.profile__job');                              /* Профессия пользователя на сайте */
@@ -47,32 +48,26 @@ const inputJob = document.querySelector('.popup__form-input_type_job');         
 const inputPlaceEl = document.querySelector('.popup__form-input_type_place');
 const inputImageEl = document.querySelector('.popup__form-input_type_image');
 
-const formSubmit = document.querySelector('.popup__form');                                /* Отправка формы */
+const formSubmit = document.querySelector('.popup__form');                               /* Отправка формы */
 
-const openPopupUser =  () => {openPopup(popupUser)}                                       /* Открыть окно редактирования пользователя */
-const openPopupPlace = () => {openPopup(popupPlace)}                                      /* Открыть окно добавления фото */
-const openPopupImage = () => {openPopup(popupImage)}                                      /* Открыть окно просмотра фото */
+const openPopupUser =  () => {openPopup(popupUser)}                                      /* Открыть окно редактирования пользователя */
+const openPopupPlace = () => {openPopup(popupPlace)}                                     /* Открыть окно добавления фото */
+const openPopupImage = () => {openPopup(popupImage)}                                     /* Открыть окно просмотра фото */
 
-const closePopupUser = () => {closePopup(popupUser)}                                      /* Закрыть окно редактирования пользователя */
-const closePopupPlace = () => {closePopup(popupPlace)}                                    /* Закрыть окно добавления фото */
-const closePopupImage = () => {closePopup(popupImage)}                                    /* Закрыть окно просмотра фото */
+const closePopupUser = () => {closePopup(popupUser)}                                     /* Закрыть окно редактирования пользователя */
+const closePopupPlace = () => {closePopup(popupPlace)}                                   /* Закрыть окно добавления фото */
+const closePopupImage = () => {closePopup(popupImage)}                                   /* Закрыть окно просмотра фото */
 
 const popupImageView = document.querySelector('.popup__photo');
 const popupNameView = document.querySelector('.popup__caption');
 
-const addImageKeyEnter = (evt) => {
-  if ((document.querySelector('.popup_type_place').classList.contains('.popup_opened') && (evt.key === 'Enter'))) {
-  }
-  body.addEventListener('keydown', addImageKeyEnter)
-  submitFormPlace();
-}                                                                                 /* Отправить форму добавления фото клавишей 'Enter'*/
 
 
-
+/* Получить данные в поле (input) окна редактирования пользователя */
 function getInputValueProfile() {
   inputName.value = profileName.textContent
   inputJob.value = profileJob.textContent
-}                                                                 /* Получить данные в поле (input) окна редактирования пользователя */
+}                                                                 
 
 getInputValueProfile()
 
@@ -84,21 +79,19 @@ function openPopup(popup) {
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  body.removeEventListener('keydown', closePopupEsc)
   body.removeEventListener('mousedown', closePopupMouse)
 }                                                                                         /* Закрыть Popup */
 
 function closePopupEsc(evt) {
-  const openedPopup = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
-    openedPopup.classList.remove('popup_opened');
-}
-  body.removeEventListener('keydown', closePopupEsc)
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup) 
+  }
 }                                                                                         /* Закрыть Popup клавишей Escape */
 
 function closePopupMouse(evt) {
-  const openedPopup = document.querySelector('.popup_opened');
-  if (evt.target === openedPopup) {
-    openedPopup.classList.remove('popup_opened');}
+  if (evt.target.classList.contains('popup_opened')) {closePopup(evt.target)}  
 }                                                                                         /* Закрыть Popup кликом в любом месте */
                                                                                
 function viewImage(link, name) {
@@ -108,21 +101,22 @@ function viewImage(link, name) {
   openPopupImage();
 }                                                                                         /* Увеличить фото */
 
+/* Лайк */
 function toggleLikeButton(evt) {
   evt.target.classList.toggle('elements__like_active');
-}                                                                                         /* Лайк */
+}                                                                                         
 
+/* Создание карточки */
 function getPlace(item) {
     const newItem = templateEl.content.cloneNode(true);
-  
-    newItem.querySelector('.elements__image').src = item.link;
+    const img = newItem.querySelector('.elements__image')
+
+    img.src = item.link;
+    img.alt = item.name;
     newItem.querySelector('.elements__name').textContent = item.name;
-    newItem.querySelector('.elements__image').alt = item.name;
   
     const removeBtn = newItem.querySelector('.elements__btn-remove');
     removeBtn.addEventListener('click', deleteImage);
-
-    const img = newItem.querySelector('.elements__image')
 
     img.addEventListener('click', () => viewImage(item.link, item.name));
 
@@ -130,43 +124,45 @@ function getPlace(item) {
     likeButton.addEventListener('click', toggleLikeButton);
 
     return newItem;
-}                                                                                         /* Создание карточки */
+}                                                                                         
 
+/* Рендер фото на странице из массива */
 function render() {
     const html = initialPlaces
         .map(getPlace)
 
     elementsContainer.append(...html);
-}                                                                                         /* Рендер фото на странице из массива */
+}                                                                                         
 
 render();
 
+/* Отправка формы редактирования пользователя */
 function submitFormUser (evt) {
     evt.preventDefault();
     profileName.textContent = inputName.value
     profileJob.textContent = inputJob.value
     closePopupUser()
-}                                                                                         /* Отправка формы редактирования пользователя */
+}                                                                                         
 
+/* Отправка формы добавления фото */
 function submitFormPlace (evt, formElement, formElement) {
     evt.preventDefault();
     const inputPlace = inputPlaceEl.value;
     const inputImage = inputImageEl.value;
-    const buttonSubmit = popupPlace.querySelector(".popup__button-save");
     const inputListItem = getPlace({name: inputPlace, link: inputImage});
     elementsContainer.prepend(inputListItem);
     inputPlaceEl.value = ''
     inputImageEl.value = ''
     buttonSubmit.setAttribute("disabled", true)
-    body.removeEventListener('keydown', addImageKeyEnter)
     closePopupPlace()
-}                                                                                          /* Отправка формы добавления фото */
+}
 
+/* Функция удаления фото */
 function deleteImage(event) {
     const targetEl = event.target;
     const targetItem = targetEl.closest('.elements__element');
     targetItem.remove();
-}                                                                                          /* Функция удаления фото */
+}                                                                                          
 
 
 
