@@ -13,6 +13,11 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
+.popup__form-input:focus {
+  outline: none;
+  box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+
 @media screen and (max-width: 621px) {
   .popup__form-input {
     width: 238px;
