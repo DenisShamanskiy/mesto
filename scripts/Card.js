@@ -32,7 +32,6 @@ export default class Card {
   
     _likeCard() {
       this._elementsOfCard.buttonLike.classList.toggle('elements__like_active');
-      console.log(this._name)
     }
   
     _deleteCard() {

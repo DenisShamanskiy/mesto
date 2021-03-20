@@ -2,32 +2,7 @@ import FormValidator from './FormValidator.js';
 import {settingValid} from './settingValid.js';
 import Card from './Card.js';
 
-const initialPlaces = [
-    {
-      name: 'Нью-Йорк',
-      link: 'https://images.unsplash.com/photo-1457885208630-7f09c8b8ba2b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1349&q=80'
-    },
-    {
-      name: 'Лондон',
-      link: 'https://images.unsplash.com/photo-1533929736458-ca588d08c8be?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80'
-    },
-    {
-      name: 'Париж',
-      link: 'https://images.unsplash.com/photo-1435164205788-305635a36ec2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80'
-    },
-    {
-      name: 'Дубай',
-      link: 'https://images.unsplash.com/flagged/photo-1559717865-a99cac1c95d8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2251&q=80'
-    },
-    {
-      name: 'Мадрид',
-      link: 'https://images.unsplash.com/photo-1557675518-7b72340cc437?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2167&q=80'
-    },
-    {
-      name: 'Санкт-Петербург',
-      link: 'https://images.unsplash.com/photo-1571850567059-c1c75ad541e6?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1275&q=80'
-    }
-  ];
+
 
 const elementsContainer = document.querySelector('.elements');
 
@@ -36,6 +11,9 @@ const body = document.querySelector('.body');
 const popupUser = document.querySelector('.popup_type_user');                            /* Окно редактирования пользователя */
 const popupPlace = document.querySelector('.popup_type_place');                          /* Окно добавления фото */
 const popupImage = document.querySelector('.popup_type_image');                          /* Окно просмотра фото */
+
+
+const popupPlaceForm = document.querySelector('.popup__form_place');
 
 const profileEditBtn = document.querySelector('.profile__button-edit');                  /* Кнопка редактирования пользователя */
 const imageAddBtn = document.querySelector('.profile__button-add-image');                /* Кнопка добавления фото */
@@ -52,8 +30,6 @@ const inputImageEl = document.querySelector('.popup__form-input_type_image');
 
 const formSubmit = document.querySelector('.popup__form');                               /* Отправка формы */
 
-const openPopupUser =  () => {openPopup(popupUser)}                                      /* Открыть окно редактирования пользователя */
-const openPopupPlace = () => {openPopup(popupPlace)}                                     /* Открыть окно добавления фото */
 const openPopupImage = () => {openPopup(popupImage)}                                     /* Открыть окно просмотра фото */
 
 const closePopupUser = () => {closePopup(popupUser)}                                     /* Закрыть окно редактирования пользователя */
@@ -135,19 +111,38 @@ function submitFormUser (evt) {
     closePopupUser()
 }                                                                                         
 
-// Отправка формы добавления фото
-function submitFormPlace(evt) {
-
-  evt.preventDefault();
+// Создание карточки при отправке формы добавления фото
+function createCard() {
   const newCard = new Card({name:inputPlaceEl.value, link:inputImageEl.value},'.template', viewImage);
   elementsContainer.prepend(newCard.generateCard());
+}
+
+// Изменить профиль
+function editProfile() {
+  popupProfileFormValid.clearPopup();
+  getInputValueProfile()
+  openPopup(popupUser);
+}
+
+// Добавить фото
+function addCard() {
+  popupCardFormValid.clearPopup();
+  popupCardFormValid.setPopupCardSubmitToInitial();
+  openPopup(popupPlace);
+  popupPlaceForm.reset();
+}
+
+// Отправка формы добавления фото
+function submitFormPlace(evt) {
+  evt.preventDefault();
+  createCard()
   closePopup(popupPlace);
 }
 
 
 
-profileEditBtn.addEventListener('click', openPopupUser)
-imageAddBtn.addEventListener('click', openPopupPlace)
+profileEditBtn.addEventListener('click', editProfile)
+imageAddBtn.addEventListener('click', addCard);
 
 popupCloseBtn.addEventListener('click', closePopupUser)
 popupCloseBtnPlace.addEventListener('click', closePopupPlace)
