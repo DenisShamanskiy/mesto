@@ -90,18 +90,16 @@ function viewImage(name, link) {
   openPopupImage();
 }                                                                                      
 
-// Создание карточек
-function renderCards() {
-
-  const cardsArray = initialPlaces.map((item) => {
-    const newCard = new Card(item, '.template', viewImage);
-
-    return newCard.generateCard();
-  });
-  elementsContainer.append(...cardsArray);
+// Создание карточки при отправке формы добавления фото
+function createCard() {
+  const newCard = new Card({name:inputPlaceEl.value, link:inputImageEl.value},'.template', viewImage);
+  return newCard
 }
 
-renderCards();
+initialPlaces.forEach((item) => {
+  const cardElement = new Card(item, '.template', viewImage).generateCard();
+  elementsContainer.append(cardElement);
+});
 
 // Отправка формы редактирования пользователя
 function submitFormUser (evt) {
@@ -109,23 +107,17 @@ function submitFormUser (evt) {
     profileName.textContent = inputName.value
     profileJob.textContent = inputJob.value
     closePopupUser()
-}                                                                                         
-
-// Создание карточки при отправке формы добавления фото
-function createCard() {
-  const newCard = new Card({name:inputPlaceEl.value, link:inputImageEl.value},'.template', viewImage);
-  elementsContainer.prepend(newCard.generateCard());
 }
 
 // Изменить профиль
-function editProfile() {
+function openEditProfilePopup() {
   popupProfileFormValid.clearPopup();
   getInputValueProfile()
   openPopup(popupUser);
 }
 
 // Добавить фото
-function addCard() {
+function openAddCardPopup() {
   popupCardFormValid.clearPopup();
   popupCardFormValid.setPopupCardSubmitToInitial();
   openPopup(popupPlace);
@@ -135,14 +127,15 @@ function addCard() {
 // Отправка формы добавления фото
 function submitFormPlace(evt) {
   evt.preventDefault();
-  createCard()
+  const newCreateCard = createCard()
   closePopup(popupPlace);
+  elementsContainer.prepend(newCreateCard.generateCard())
 }
 
 
 
-profileEditBtn.addEventListener('click', editProfile)
-imageAddBtn.addEventListener('click', addCard);
+profileEditBtn.addEventListener('click', openEditProfilePopup)
+imageAddBtn.addEventListener('click', openAddCardPopup);
 
 popupCloseBtn.addEventListener('click', closePopupUser)
 popupCloseBtnPlace.addEventListener('click', closePopupPlace)
