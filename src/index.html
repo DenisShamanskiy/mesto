@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto</title>
-    <link rel="stylesheet" href="pages/index.css">
-
 </head>
 
 <body class="body">
@@ -14,22 +12,22 @@
     <div class="page">
 
         <header class="header">
-            <img class="header__logo" src="images/header__logo.svg" alt="Логотип">
+            <img class="header__logo" src="<%=require('./images/header__logo.svg')%>" alt="Логотип">
         </header>
         <main>
             <section class="profile">
-                <img class="profile__avatar" src="images/profile__img.jpg" alt="Аватар пользователя">
-                <div class="profile__profile-info">
+                <img class="profile__avatar" src="<%=require('./images/profile__img.jpg')%>" alt="Аватар пользователя">
+                <div class="profile__info">
                     <div class="profile__description">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
                         <button type="button" class="profile__button-edit">
-                            <img class="profile__button-edit-image" src="images/profile__button-edit.svg" alt="Кнопка изменить" >
+                            <img class="profile__button-edit-image" src="<%=require('./images/profile__button-edit.svg')%>" alt="Кнопка изменить" >
                         </button>
                     </div>
                     <p class="profile__job">Исследователь океана</p>
                 </div>
                 <button type="button" class="profile__button-add-image">
-                    <img src="images/profile__button-add.svg" alt="Кнопка добавить">
+                    <img src="<%=require('./images/profile__button-add.svg')%>" alt="Кнопка добавить">
                 </button>
             </section>
 
@@ -48,7 +46,7 @@
         <form class="popup__form" name="user" action="#" method="post" novalidate autocomplete="off">
 
             <button type="button" class="popup__button-close">
-                <img class="popup__button-close-image" src="images/popup__button-close.svg" alt="Закрыть окно редактирования">
+                <img class="popup__button-close-image" src="<%=require('./images/popup__button-close.svg')%>" alt="Закрыть окно редактирования">
             </button>
 
             <fieldset class="popup__title">
@@ -56,13 +54,13 @@
                 <legend class="popup__heading">Редактировать профиль</legend>
 
                 <section>
-                    <input class="popup__form-input popup__form-input_type_name" type="text" name="popup-name" placeholder="Имя" required minlength="2" maxlength="40">
-                    <span class="popup__form-input-error popup__form-input-error_type_popup-name"></span>
+                    <input class="popup__form-input popup__form-input_type_name" type="text" name="name" placeholder="Имя" required minlength="2" maxlength="40">
+                    <span class="popup__form-input-error popup__form-input-error_type_name"></span>
                 </section>
       
                 <section>
-                    <input class="popup__form-input popup__form-input_type_job" type="text" name="popup-job" placeholder="Профессия" required minlength="2" maxlength="200">
-                    <span class="popup__form-input-error popup__form-input-error_type_popup-job"></span>
+                    <input class="popup__form-input popup__form-input_type_job" type="text" name="job" placeholder="Профессия" required minlength="2" maxlength="200">
+                    <span class="popup__form-input-error popup__form-input-error_type_job"></span>
                 </section>
 
                 <button type="submit" class="popup__button-save">Сохранить</button>
@@ -77,7 +75,7 @@
         <form class="popup__form popup__form_place" name="place" action="#" method="post" novalidate>
 
             <button type="button" class="popup__button-close popup__button-close_place">
-                <img class="popup__button-close-image" src="images/popup__button-close.svg" alt="Закрыть окно">
+                <img class="popup__button-close-image" src="<%=require('./images/popup__button-close.svg')%>" alt="Закрыть окно">
             </button>
 
             <fieldset class="popup__title">
@@ -85,13 +83,13 @@
                 <legend class="popup__heading">Новое место</legend>
 
                 <section>
-                    <input class="popup__form-input popup__form-input_type_place" type="text" name="popup-place" placeholder="Название" required minlength="2" maxlength="30">
-                    <span class="popup__form-input-error popup__form-input-error_type_popup-place"></span>
+                    <input class="popup__form-input popup__form-input_type_place" type="text" name="place" placeholder="Название" required minlength="2" maxlength="30">
+                    <span class="popup__form-input-error popup__form-input-error_type_place"></span>
                 </section>
       
                 <section>
-                    <input class="popup__form-input popup__form-input_type_image" type="url" name="popup-image" placeholder="Ссылка на картинку" required>
-                    <span class="popup__form-input-error popup__form-input-error_type_popup-image"></span>
+                    <input class="popup__form-input popup__form-input_type_image" type="url" name="image" placeholder="Ссылка на картинку" required>
+                    <span class="popup__form-input-error popup__form-input-error_type_image"></span>
                 </section>
 
                 <button type="submit" class="popup__button-save">Сохранить</button>
@@ -104,11 +102,11 @@
 
         <div class="popup__image-container">
 
-            <img class="popup__photo" src="images/profile__img.jpg" alt="Название фото">
+            <img class="popup__photo" src="<%=require('./images/profile__img.jpg')%>" alt="Название фото">
             <div class="popup__caption"></div>
             
             <button type="button" class="popup__button-close popup__button-close_image">
-                <img class="popup__button-close-image" src="images/popup__button-close.svg" alt="Закрыть окно">
+                <img class="popup__button-close-image" src="<%=require('./images/popup__button-close.svg')%>" alt="Закрыть окно">
             </button>
             
         </div>
@@ -125,9 +123,6 @@
             </div>
         </div>
     </template>
-
-    <script src="scripts/initialPlaces.js"></script>
-    <script type="module" src="scripts/index.js"></script>
 
 </body>
 

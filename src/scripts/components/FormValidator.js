@@ -57,16 +57,7 @@ export default class FormValidator {
             });
           });
       };
-
-
-
-    setPopupCardSubmitToInitial() {
-        this._formElement.querySelector(this._settingValid.submitButtonSelector).setAttribute('disabled',true);
-        this._formElement.querySelector(this._settingValid.submitButtonSelector).classList.add(this._settingValid.inactiveButtonClass);
-    }
-
-
-
+      /*
     clearPopup() {
         const errorList = Array.from(this._formElement.querySelectorAll(`.${this._settingValid.activeErrorClass}`));
         const inputErrorList = Array.from(this._formElement.querySelectorAll(`.${this._settingValid.inputErrorClass}`));
@@ -83,6 +74,13 @@ export default class FormValidator {
             inputErrorElement.classList.remove(this._settingValid.inputErrorClass);
           })
         }
+      }*/
+
+      setPopupToInitialState() {
+        this._inputList.forEach(inputErrorElement => this._hideInputError(inputErrorElement));
+    
+        this._buttonElement.setAttribute('disabled',true);
+        this._buttonElement.classList.add(this._settingValid.inactiveButtonClass);
       }
 
     enableValidation() {

@@ -1,4 +1,4 @@
-.profile__profile-info {
+.profile__info {
   width: 336px;
   margin: auto auto auto 0;
   display: flex;
@@ -7,13 +7,13 @@
 }
 
 @media screen and (max-width: 986px) {
-  .profile__profile-info {
+  .profile__info {
     margin: 22.75px auto 36px;
     align-items: center;
   }
 }
 @media screen and (max-width: 621px) {
-  .profile__profile-info {
+  .profile__info {
     width: 88.125%;
   }
 }
