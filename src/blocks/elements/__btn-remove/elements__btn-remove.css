@@ -9,4 +9,6 @@
   border: none;
   cursor: pointer;
   position: absolute;
+  display: none;
+  background-repeat: no-repeat;
 }
