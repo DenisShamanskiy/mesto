@@ -82,10 +82,13 @@ const placesList = new Section(
 const promiseGetUser = api.getUser();
 const promiseGetCards = api.getCards();
 
+console.log(promiseGetUser);
+console.log(promiseGetCards);
+
 Promise.all([promiseGetUser, promiseGetCards])
-  .then((arrayOfObjectsUserAndCards) => {
-    userInfo.setUserInfo(arrayOfObjectsUserAndCards[0]);
-    placesList.renderItems(arrayOfObjectsUserAndCards[1]);
+  .then(([userData, cards]) => {
+    userInfo.setUserInfo(userData);
+    placesList.renderItems(cards);
   })
   .catch((err) => alert(err));
 
